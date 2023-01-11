@@ -1,0 +1,194 @@
+/* 
+Por padrão os navegadores já tem tamanho de fonte de..
+font-size: 16px;
+
+ background-image: url(../assets/MobileDarkMode.png);  Função que adiciona imagem via css
+ background-repeat: no-repeat;/* propriedade que trava a repetição que ocorre por padrão
+ Com essa propriedade, a imagem sobe pois, ela começa com o top -0 no eixo y
+ Eixo y é o vertical e o eixo  horizontal é o x
+ Para reposicionar ele precisa começar no top então adiciono o valor top 
+ background-position: top center;
+ PAra cobrir todo espaço visível, eu preciso usar esse valor para preencher tudo
+ background-size: cover;
+
+
+ Para simplificar tudo isso eu posso usar um atalho ou um short-hand
+ Perceba que não estou usando background-image, estou passando apenas background
+*/
+
+/* Tiranto de todos os elementos o margin, o pedding e o box-sizing do navegador */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+/* 
+
+Variáveis no css ajudam a mudar cores e estilos de forma dinâmica em todos os elementos
+que usam essa variável
+*/
+:root{
+    --text-color: white;
+    --dark-url:url(../assets/MobileDarkMode.png);
+    --stroke-color: rgba(255, 255, 255, 0.5);
+    --surface-color: rgba(255, 255, 255, 0.1);
+    --surface-color-hover: rgba(0, 0, 0 0.02);
+    --highlight: rgba(0, 0, 0, 0.1);
+    --switch-bg-url:url(../assets/moon-stars.svg);
+}
+
+.light{
+    --text-color:black;
+    --dark-url:url(../assets/MobileLightMode.png);
+    --stroke-color: rgba(0, 0, 0, 0.5);
+    --surface-color: rgba(0, 0, 0, 0.05);
+    --surface-color-hover: rgba(255, 255, 255 0.02);
+    --highlight: rgba(0, 0, 0, 0.1);
+    --switch-bg-url:url(../assets/sun-stars.svg);
+}
+
+body{
+    background: var(--dark-url) no-repeat top center/cover;
+}
+
+/* Essa regra se aplica para todos os elementos dentro do body */
+body * {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color);
+}
+
+/*
+ No html tudo são caixas então eu preciso pensar em formas de organização.
+ Caixas dentro de caixas e a caixa principal será o container
+ */
+
+ #container{
+    width: 360px;
+   margin: 1px auto 0;
+  padding: 0 24px;
+ }
+
+ /* Todo elemento inline não aceita posicionamento automático (margin:auto) então, precisamos 
+ definir estilos no pai
+ */
+
+
+#profile {
+    text-align: center;
+    padding: 4px;
+}
+ 
+/* Estou procurando a tag imagem dentro do profile */
+ #profile img{
+    width: 112px;
+ }
+
+ #switch{
+    width: 64px;
+     position: relative;
+     margin: 4px auto;
+    
+ }
+
+
+ #profile p{
+   font-weight: 500;
+   line-height: 24px;
+   margin-top: 8px;
+ }
+
+ #switch button{
+    width: 32px;
+    height: 32px;
+    background: white var(--switch-bg-url)  no-repeat center;
+    border: 0;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    z-index: 1;
+ }
+
+ #switch span{
+    display: block;
+    border-radius: 9999px;
+   width: 64px;
+   height: 24px;
+   background: var(--surface-color);
+   border: 1px solid var(--stroke-color);
+   -webkit-backdrop-filter: blur(4x);
+ }
+
+
+ .light #switch button{
+    right: 0;
+    left: initial;
+ }
+
+ /* ===================LINKS========================= */
+ ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 11px 0;
+}
+
+ /* RGBA Red Green Blue Alfa
+ 0 -> 255 = 0 mais escuro + 255 a cor mais forte da cor
+ Alfa -> Transparência = 0.5
+  */
+ ul li a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 16px;
+    background: var(--surface-color);
+    border: 1px solid var(--stroke-color);
+    border-radius: 8px;
+    backdrop-filter: blur(4px);/* Deixa o fundo embassado */
+    -webkit-backdrop-filter: blur(4px);
+    font-weight: 500;
+    text-decoration: none;
+ /*    text-decoration: line-through;/* Adiciona uma linha no meio do texto */ 
+     transition: background 0.2s;/* Vai transicionar os backgrounds */
+ }
+
+ /* pseudo-selector
+ Ao passar o mouse, mostre um outro comportamento
+ */
+ ul li a:hover{
+    background: var(--surface-color-hover);
+ border: 1.5px solid var(--text-color);
+ }
+
+/* ===================SOCIAL LINKS========================= */
+#social-links {
+    justify-content: center;
+    display: flex;
+    padding: 3px 0;
+    font-size: 24px;
+}
+
+#social-links a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    transition: background 0.2s;
+    border-radius: 50%;
+}
+
+#social-links a:hover{
+    background: var(--highlight);
+}
+    
+/* ===================FOOTER========================= */
+footer{
+    padding: 24px 0;
+    text-align: center;
+}
+
